@@ -17,6 +17,8 @@ public class AudioLoudnessDetection : MonoBehaviour
         //Mic check
         //print(Microphone.devices.Length);
         //print(Microphone.devices[0]);
+
+        print(AudioSettings.outputSampleRate);
     }
 
     public void MicrophoneToAudioClip()
@@ -24,7 +26,7 @@ public class AudioLoudnessDetection : MonoBehaviour
         if(Microphone.devices.Length > 0)
         {
             string microphoneName = Microphone.devices[0];
-            microphoneClip = Microphone.Start(microphoneName, true, 20, AudioSettings.outputSampleRate);
+            microphoneClip = Microphone.Start(microphoneName, true, 30, 44100);
         }
         else
         {

@@ -12,48 +12,97 @@ public class ChangeFromAudio : MonoBehaviour
 
     public AudioLoudnessDetection detection;
 
-    public bool shouldMove = true;
+    public GameObject targetPosition;
+
+    private Transform startPosition;
+
+    public bool isPlatform;              //is a light or platform
+    public bool horizontal;                     //which direction the platform moves
+
     public int loudnessSensitivity = 10000;
+    public int velocity = 2;
+
     public float threshold = 0.1f;
+    public float lightChangeSpeed = 0.05f;
     private float loudness;
+    public float speed = 1.5f;
 
     void Start()
     {
-        light = GetComponent<Light2D>();
+        if (!isPlatform)
+        {
+            light = GetComponent<Light2D>();
+        }
+        else
+        {
+            startPosition = transform;
+        }
     }
 
     void Update()
     {
         loudness = detection.GetLoudnessfromMicrophone() * loudnessSensitivity;
-        
-        if(loudness < threshold)
+
+        if (loudness < threshold)
         {
             loudness = 0;
         }
 
-        HandleChanges(shouldMove);
+        HandleChanges(isPlatform);
 
         //Check if Sensitivity is ok
-        /*if(loudness > 0.1)
+        if (loudness > 0.1)
         {
             print(loudness);
-        }*/
+        }
     }
 
-    private void HandleChanges(bool shouldMove)
+    private void HandleChanges(bool isPlatform)
     {
-        if (shouldMove)
+        if (isPlatform)
         {
-
+            if(loudness > 0.1)
+            {
+                if (horizontal)
+                {
+                    if (Mathf.Abs(transform.position.x - targetPosition.transform.position.x) > 0.1)
+                    {
+                        transform.position = new(transform.position.x + velocity * Time.deltaTime * speed, transform.position.y);
+                    }
+                }
+                else
+                {
+                    if (Mathf.Abs(transform.position.y - targetPosition.transform.position.y) > 0.1)
+                    {
+                        transform.position = new(transform.position.x, transform.position.y + velocity * Time.deltaTime * speed);
+                    }
+                }
+            }
+            else
+            {
+                if (horizontal)
+                {
+                    if(Mathf.Abs(transform.position.x - startPosition.transform.position.x) > 0.1)
+                    {
+                        transform.position = new(transform.position.x - velocity * Time.deltaTime * speed, transform.position.y);
+                    }
+                }
+                else
+                {
+                    if (Mathf.Abs(transform.position.y - startPosition.transform.position.y) > 0.1)
+                    {
+                        transform.position = new(transform.position.x, transform.position.y - velocity * Time.deltaTime * speed);
+                    }
+                }
+            }
         }
         else
         {
-            //transform.localScale = Vector3.Lerp(minScale, maxScale, loudness);
             if(loudness > 0.1)
             {
                 if(light.intensity < 1)
                 {
-                    light.intensity += 0.05f;
+                    light.intensity += lightChangeSpeed;
                 }
                 else
                 {
@@ -64,7 +113,7 @@ public class ChangeFromAudio : MonoBehaviour
             {
                 if(light.intensity > 0)
                 {
-                    light.intensity -= 0.05f;
+                    light.intensity -= lightChangeSpeed;
                 }
                 else
                 {
