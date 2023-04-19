@@ -663,9 +663,9 @@ MonoBehaviour:
   m_ComponentVersion: 1
   m_LightType: 3
   m_BlendStyleIndex: 0
-  m_FalloffIntensity: 0.899
+  m_FalloffIntensity: 0.7
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 1
+  m_Intensity: 0.1
   m_LightVolumeIntensity: 1
   m_LightVolumeIntensityEnabled: 0
   m_ApplyToSortingLayers: 859807c19be808c9
@@ -715,7 +715,7 @@ MonoBehaviour:
     m_Extent: {x: 0.9985302, y: 0.99853027, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
-  m_PointLightInnerRadius: 1
+  m_PointLightInnerRadius: 2
   m_PointLightOuterRadius: 8
   m_ShapeLightParametricSides: 5
   m_ShapeLightParametricAngleOffset: 0
@@ -739,13 +739,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7ead1d853a84e747bb55f093ca61b49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  source: {fileID: 0}
   light: {fileID: 1505857091}
   minScale: {x: 1, y: 1, z: 1}
   maxScale: {x: 3, y: 3, z: 3}
   detection: {fileID: 500114225}
-  shouldMove: 1
-  loudnessSensitivity: 100
+  shouldMove: 0
+  loudnessSensitivity: 10000
   threshold: 0.1
 --- !u!1 &2117413371
 GameObject:

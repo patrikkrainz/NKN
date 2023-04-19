@@ -14,13 +14,22 @@ public class AudioLoudnessDetection : MonoBehaviour
 
     void Update()
     {
-        
+        //Mic check
+        //print(Microphone.devices.Length);
+        //print(Microphone.devices[0]);
     }
 
     public void MicrophoneToAudioClip()
     {
-        string microphoneName = Microphone.devices[0];
-        microphoneClip = Microphone.Start(microphoneName, true, 20, AudioSettings.outputSampleRate);
+        if(Microphone.devices.Length > 0)
+        {
+            string microphoneName = Microphone.devices[0];
+            microphoneClip = Microphone.Start(microphoneName, true, 20, AudioSettings.outputSampleRate);
+        }
+        else
+        {
+            print("No Mic");
+        }
     }
 
     public float GetLoudnessfromMicrophone()
