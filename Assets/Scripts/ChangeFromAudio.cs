@@ -1,15 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
-public class NewBehaviourScript : MonoBehaviour
+public class ChangeFromAudio : MonoBehaviour
 {
     public AudioSource source;
 
-    public Light light;
+    public Light2D light;
 
-    public Vector3 minScale;
-    public Vector3 maxScale;
+    public Vector3 minScale = new Vector3(1, 1, 1);
+    public Vector3 maxScale = new Vector3(3, 3, 3);
 
     public AudioLoudnessDetection detection;
 
@@ -42,8 +43,7 @@ public class NewBehaviourScript : MonoBehaviour
         else
         {
             //transform.localScale = Vector3.Lerp(minScale, maxScale, loudness);
-            //light = GetComponent<Light>(); not implemented yet
-            //light.range = 10;
+            
         }
     }
 }
