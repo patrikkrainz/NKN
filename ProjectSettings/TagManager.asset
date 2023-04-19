@@ -41,3 +41,9 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: World
+    uniqueID: 3372804251
+    locked: 0
+  - name: Player
+    uniqueID: 3238500485
+    locked: 0

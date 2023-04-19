@@ -31,8 +31,6 @@ public class NewBehaviourScript : MonoBehaviour
         {
             loudness = 0;
         }
-
-        
     }
 
     private void HandleChanges(bool shouldMove)
@@ -43,7 +41,7 @@ public class NewBehaviourScript : MonoBehaviour
         }
         else
         {
-            transform.localScale = Vector3.Lerp(minScale, maxScale, loudness);
+            //transform.localScale = Vector3.Lerp(minScale, maxScale, loudness);
             //light = GetComponent<Light>(); not implemented yet
             //light.range = 10;
         }
