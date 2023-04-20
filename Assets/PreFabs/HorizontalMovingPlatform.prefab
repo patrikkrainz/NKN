@@ -249,6 +249,10 @@ MonoBehaviour:
   targetPosition: {x: 0, y: 0, z: 0}
   isPlatform: 1
   horizontal: 1
+  startsLeft: 1
+  startsRight: 0
+  startsUp: 0
+  startsDown: 0
   change: 0
   loudnessSensitivity: 1000
   velocity: 2

@@ -19,6 +19,10 @@ public class ChangeFromAudio : MonoBehaviour
 
     public bool isPlatform;                     //is a light or platform
     public bool horizontal;                     //which direction the platform moves
+    public bool startsLeft;
+    public bool startsRight;
+    public bool startsUp;
+    public bool startsDown;
     public bool change = false;
 
     public int loudnessSensitivity = 1000;
@@ -83,16 +87,36 @@ public class ChangeFromAudio : MonoBehaviour
             {
                 if (horizontal)
                 {
-                    if (Mathf.Abs(transform.position.x - targetPosition.x) > 0.1)
+                    if (startsLeft)
                     {
-                        transform.position = new(transform.position.x + velocity * Time.deltaTime * speed, transform.position.y);
+                        if (Mathf.Abs(transform.position.x - targetPosition.x) > 0.1)
+                        {
+                            transform.position = new(transform.position.x + velocity * Time.deltaTime * speed, transform.position.y);
+                        }
+                    }
+                    else if (startsRight)
+                    {
+                        if (Mathf.Abs(transform.position.x - targetPosition.x) > 0.1)
+                        {
+                            transform.position = new(transform.position.x - velocity * Time.deltaTime * speed, transform.position.y);
+                        }
                     }
                 }
                 else
                 {
-                    if (Mathf.Abs(transform.position.y - targetPosition.y) > 0.1)
+                    if (startsDown)
                     {
-                        transform.position = new(transform.position.x, transform.position.y + velocity * Time.deltaTime * speed);
+                        if (Mathf.Abs(transform.position.y - targetPosition.y) > 0.1)
+                        {
+                            transform.position = new(transform.position.x, transform.position.y + velocity * Time.deltaTime * speed);
+                        }
+                    }
+                    else if (startsUp)
+                    {
+                        if (Mathf.Abs(transform.position.y - targetPosition.y) > 0.1)
+                        {
+                            transform.position = new(transform.position.x, transform.position.y - velocity * Time.deltaTime * speed);
+                        }
                     }
                 }
             }
@@ -100,16 +124,36 @@ public class ChangeFromAudio : MonoBehaviour
             {
                 if (horizontal)
                 {
-                    if(Mathf.Abs(transform.position.x - startPosition.x) > 0.1)
+                    if (startsLeft)
                     {
-                        transform.position = new(transform.position.x - velocity * Time.deltaTime * speed, transform.position.y);
+                        if (Mathf.Abs(transform.position.x - startPosition.x) > 0.1)
+                        {
+                            transform.position = new(transform.position.x - velocity * Time.deltaTime * speed, transform.position.y);
+                        }
+                    }
+                    else if (startsRight)
+                    {
+                        if (Mathf.Abs(transform.position.x - startPosition.x) > 0.1)
+                        {
+                            transform.position = new(transform.position.x + velocity * Time.deltaTime * speed, transform.position.y);
+                        }
                     }
                 }
                 else
                 {
-                    if (Mathf.Abs(transform.position.y - startPosition.y) > 0.1)
+                    if (startsDown)
                     {
-                        transform.position = new(transform.position.x, transform.position.y - velocity * Time.deltaTime * speed);
+                        if (Mathf.Abs(transform.position.y - startPosition.y) > 0.1)
+                        {
+                            transform.position = new(transform.position.x, transform.position.y - velocity * Time.deltaTime * speed);
+                        }
+                    }
+                    else if (startsUp)
+                    {
+                        if (Mathf.Abs(transform.position.y - startPosition.y) > 0.1)
+                        {
+                            transform.position = new(transform.position.x, transform.position.y + velocity * Time.deltaTime * speed);
+                        }
                     }
                 }
             }
