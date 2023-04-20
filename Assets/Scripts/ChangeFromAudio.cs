@@ -72,7 +72,7 @@ public class ChangeFromAudio : MonoBehaviour
             print(loudness);
         }*/
 
-        print(loudness);
+        //print(loudness);
     }
 
     private void HandleChanges(bool isPlatform)
