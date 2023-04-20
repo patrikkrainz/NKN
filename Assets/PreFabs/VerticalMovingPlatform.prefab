@@ -47,7 +47,7 @@ GameObject:
   - component: {fileID: 8477226428964904264}
   m_Layer: 0
   m_Name: movingPlatform
-  m_TagString: Untagged
+  m_TagString: Platform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -158,8 +158,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   light: {fileID: 0}
-  minScale: {x: 1, y: 1, z: 1}
-  maxScale: {x: 3, y: 3, z: 3}
   detection: {fileID: 0}
   Target: {fileID: 8477226429277451731}
   targetPosition: {x: 0, y: 0, z: 0}
@@ -173,7 +171,7 @@ MonoBehaviour:
   loudnessSensitivity: 1000
   velocity: 2
   threshold: 0.3
-  lightChangeSpeed: 0.1
+  lightChangeSpeed: 0.05
   speed: 1.5
   changeTimer: 0
 --- !u!1 &8477226429277451731

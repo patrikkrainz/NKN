@@ -7,9 +7,6 @@ public class ChangeFromAudio : MonoBehaviour
 {
     public Light2D light;
 
-    public Vector3 minScale = new Vector3(1, 1, 1);
-    public Vector3 maxScale = new Vector3(3, 3, 3);
-
     public AudioLoudnessDetection detection;
 
     public GameObject Target;
@@ -170,16 +167,34 @@ public class ChangeFromAudio : MonoBehaviour
                 {
                     light.intensity = 1;
                 }
+
+                if(light.pointLightOuterRadius < 10)
+                {
+                    light.pointLightOuterRadius += lightChangeSpeed;
+                }
+                else
+                {
+                    light.pointLightOuterRadius = 10;
+                }
             }
             else
             {
-                if(light.intensity > 0)
+                if(light.intensity > 0.2)
                 {
                     light.intensity -= lightChangeSpeed;
                 }
                 else
                 {
-                    light.intensity = 0;
+                    light.intensity = 0.1f;
+                }
+
+                if (light.pointLightOuterRadius > 3)
+                {
+                    light.pointLightOuterRadius -= lightChangeSpeed;
+                }
+                else
+                {
+                    light.pointLightOuterRadius = 3;
                 }
             }
         }
