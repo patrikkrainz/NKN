@@ -16,7 +16,7 @@ public class ChangeFromAudio : MonoBehaviour
 
     private Transform startPosition;
 
-    public bool isPlatform;              //is a light or platform
+    public bool isPlatform;                     //is a light or platform
     public bool horizontal;                     //which direction the platform moves
 
     public int loudnessSensitivity = 10000;
