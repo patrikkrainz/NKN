@@ -12,20 +12,23 @@ public class ChangeFromAudio : MonoBehaviour
 
     public AudioLoudnessDetection detection;
 
-    public GameObject targetPosition;
+    public GameObject Target;
 
-    private Transform startPosition;
+    public Vector3 targetPosition;
+    private Vector3 startPosition;
 
     public bool isPlatform;                     //is a light or platform
     public bool horizontal;                     //which direction the platform moves
+    public bool change = false;
 
-    public int loudnessSensitivity = 10000;
+    public int loudnessSensitivity = 1000;
     public int velocity = 2;
 
-    public float threshold = 0.1f;
-    public float lightChangeSpeed = 0.05f;
+    public float threshold = 0.3f;
+    public float lightChangeSpeed = 0.1f;
     private float loudness;
     public float speed = 1.5f;
+    public float changeTimer = 0;
 
     void Start()
     {
@@ -35,7 +38,8 @@ public class ChangeFromAudio : MonoBehaviour
         }
         else
         {
-            startPosition = transform;
+            startPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+            targetPosition = new Vector3(Target.transform.position.x, Target.transform.position.y, Target.transform.position.z);
         }
     }
 
@@ -46,33 +50,47 @@ public class ChangeFromAudio : MonoBehaviour
         if (loudness < threshold)
         {
             loudness = 0;
+            changeTimer += Time.deltaTime;
+        }
+        else
+        {
+            change = true;
+            changeTimer = 0;
+        }
+
+        if(changeTimer >= 0.3f)
+        {
+            change = false;
+            changeTimer = 0;
         }
 
         HandleChanges(isPlatform);
 
         //Check if Sensitivity is ok
-        if (loudness > 0.1)
+        /*if (loudness > 0.1)
         {
             print(loudness);
-        }
+        }*/
+
+        print(loudness);
     }
 
     private void HandleChanges(bool isPlatform)
     {
         if (isPlatform)
         {
-            if(loudness > 0.1)
+            if(change)
             {
                 if (horizontal)
                 {
-                    if (Mathf.Abs(transform.position.x - targetPosition.transform.position.x) > 0.1)
+                    if (Mathf.Abs(transform.position.x - targetPosition.x) > 0.1)
                     {
                         transform.position = new(transform.position.x + velocity * Time.deltaTime * speed, transform.position.y);
                     }
                 }
                 else
                 {
-                    if (Mathf.Abs(transform.position.y - targetPosition.transform.position.y) > 0.1)
+                    if (Mathf.Abs(transform.position.y - targetPosition.y) > 0.1)
                     {
                         transform.position = new(transform.position.x, transform.position.y + velocity * Time.deltaTime * speed);
                     }
@@ -82,14 +100,14 @@ public class ChangeFromAudio : MonoBehaviour
             {
                 if (horizontal)
                 {
-                    if(Mathf.Abs(transform.position.x - startPosition.transform.position.x) > 0.1)
+                    if(Mathf.Abs(transform.position.x - startPosition.x) > 0.1)
                     {
                         transform.position = new(transform.position.x - velocity * Time.deltaTime * speed, transform.position.y);
                     }
                 }
                 else
                 {
-                    if (Mathf.Abs(transform.position.y - startPosition.transform.position.y) > 0.1)
+                    if (Mathf.Abs(transform.position.y - startPosition.y) > 0.1)
                     {
                         transform.position = new(transform.position.x, transform.position.y - velocity * Time.deltaTime * speed);
                     }
@@ -98,7 +116,7 @@ public class ChangeFromAudio : MonoBehaviour
         }
         else
         {
-            if(loudness > 0.1)
+            if(change)
             {
                 if(light.intensity < 1)
                 {

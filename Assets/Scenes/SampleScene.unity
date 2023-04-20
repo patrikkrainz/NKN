@@ -827,14 +827,17 @@ MonoBehaviour:
   minScale: {x: 1, y: 1, z: 1}
   maxScale: {x: 3, y: 3, z: 3}
   detection: {fileID: 500114225}
-  targetPosition: {fileID: 0}
+  Target: {fileID: 0}
+  targetPosition: {x: 0, y: 0, z: 0}
   isPlatform: 0
   horizontal: 0
-  loudnessSensitivity: 10000
+  change: 0
+  loudnessSensitivity: 1000
   velocity: 2
-  threshold: 0.1
-  lightChangeSpeed: 0.05
+  threshold: 0.3
+  lightChangeSpeed: 0.1
   speed: 1.5
+  changeTimer: 0
 --- !u!1 &1523884371
 GameObject:
   m_ObjectHideFlags: 0
@@ -903,14 +906,17 @@ MonoBehaviour:
   minScale: {x: 1, y: 1, z: 1}
   maxScale: {x: 3, y: 3, z: 3}
   detection: {fileID: 500114225}
-  targetPosition: {fileID: 1358198231}
+  Target: {fileID: 1358198231}
+  targetPosition: {x: 0, y: 0, z: 0}
   isPlatform: 1
   horizontal: 1
-  loudnessSensitivity: 10000
+  change: 0
+  loudnessSensitivity: 1000
   velocity: 2
-  threshold: 0.1
-  lightChangeSpeed: 0.05
+  threshold: 0.3
+  lightChangeSpeed: 0.1
   speed: 1.5
+  changeTimer: 0
 --- !u!61 &1845285522
 BoxCollider2D:
   m_ObjectHideFlags: 0

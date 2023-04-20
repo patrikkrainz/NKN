@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AudioLoudnessDetection : MonoBehaviour
 {
-    public int sampleWindow = 64;
+    public int sampleWindow = 32;
     private AudioClip microphoneClip;
 
     void Start()
@@ -18,7 +18,7 @@ public class AudioLoudnessDetection : MonoBehaviour
         //print(Microphone.devices.Length);
         //print(Microphone.devices[0]);
 
-        print(AudioSettings.outputSampleRate);
+        //print(AudioSettings.outputSampleRate);
     }
 
     public void MicrophoneToAudioClip()
@@ -26,7 +26,7 @@ public class AudioLoudnessDetection : MonoBehaviour
         if(Microphone.devices.Length > 0)
         {
             string microphoneName = Microphone.devices[0];
-            microphoneClip = Microphone.Start(microphoneName, true, 30, 44100);
+            microphoneClip = Microphone.Start(microphoneName, true, 10, 10000);
         }
         else
         {
