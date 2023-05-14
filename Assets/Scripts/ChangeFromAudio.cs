@@ -179,13 +179,13 @@ public class ChangeFromAudio : MonoBehaviour
             }
             else
             {
-                if(light.intensity > 0.2)
+                if(light.intensity > 0.1)
                 {
                     light.intensity -= lightChangeSpeed;
                 }
                 else
                 {
-                    light.intensity = 0.1f;
+                    light.intensity = 0;
                 }
 
                 if (light.pointLightOuterRadius > 3)
