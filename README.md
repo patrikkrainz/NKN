@@ -2,12 +2,9 @@
 
 Mitglieder:
 
-Patrik Krainz
-
-Mihajlo Miletic
-
-Florian Guggenberger
-
+Patrik Krainz 
+Mihajlo Miletic 
+Florian Guggenberger 
 Elias Huber
 
 
