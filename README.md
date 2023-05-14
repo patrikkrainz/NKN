@@ -1,7 +1,8 @@
 # VoiceBased_Game
 
 Mitglieder:
-Patrik Krainz,
+Patrik Krainz
+
 Mihajlo Miletic,
 Florian Guggenberger,
 Elias Huber
