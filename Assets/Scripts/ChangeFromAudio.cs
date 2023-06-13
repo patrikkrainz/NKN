@@ -48,6 +48,13 @@ public class ChangeFromAudio : MonoBehaviour
     {
         loudness = detection.GetLoudnessfromMicrophone() * loudnessSensitivity;
 
+        if (GameHandler.dead)
+        {
+            loudness = 0;
+            change = false;
+            changeTimer = 0;
+        }
+
         if (loudness < threshold)
         {
             loudness = 0;
@@ -78,123 +85,141 @@ public class ChangeFromAudio : MonoBehaviour
 
     private void HandleChanges(bool isPlatform)
     {
-        if (isPlatform)
+        if (!GameHandler.paused && !GameHandler.won)
         {
-            if(change)
+            if (isPlatform)
             {
-                if (horizontal)
+                if (GameHandler.dead)
                 {
-                    if (startsLeft)
-                    {
-                        if (Mathf.Abs(transform.position.x - targetPosition.x) > 0.01)
-                        {
-                            transform.position = new(transform.position.x + velocity * Time.deltaTime * speed, transform.position.y);
-                        }
-                    }
-                    else if (startsRight)
-                    {
-                        if (Mathf.Abs(transform.position.x - targetPosition.x) > 0.01)
-                        {
-                            transform.position = new(transform.position.x - velocity * Time.deltaTime * speed, transform.position.y);
-                        }
-                    }
+                    transform.position = new(startPosition.x, startPosition.y, startPosition.z);
                 }
                 else
                 {
-                    if (startsDown)
+                    if (change)
                     {
-                        if (Mathf.Abs(transform.position.y - targetPosition.y) > 0.01)
+                        if (horizontal)
                         {
-                            transform.position = new(transform.position.x, transform.position.y + velocity * Time.deltaTime * speed);
+                            if (startsLeft)
+                            {
+                                if (Mathf.Abs(transform.position.x - targetPosition.x) > 0.01)
+                                {
+                                    transform.position = new(transform.position.x + velocity * Time.deltaTime * speed, transform.position.y);
+                                }
+                            }
+                            else if (startsRight)
+                            {
+                                if (Mathf.Abs(transform.position.x - targetPosition.x) > 0.01)
+                                {
+                                    transform.position = new(transform.position.x - velocity * Time.deltaTime * speed, transform.position.y);
+                                }
+                            }
+                        }
+                        else
+                        {
+                            if (startsDown)
+                            {
+                                if (Mathf.Abs(transform.position.y - targetPosition.y) > 0.01)
+                                {
+                                    transform.position = new(transform.position.x, transform.position.y + velocity * Time.deltaTime * speed);
+                                }
+                            }
+                            else if (startsUp)
+                            {
+                                if (Mathf.Abs(transform.position.y - targetPosition.y) > 0.01)
+                                {
+                                    transform.position = new(transform.position.x, transform.position.y - velocity * Time.deltaTime * speed);
+                                }
+                            }
                         }
                     }
-                    else if (startsUp)
+                    else
                     {
-                        if (Mathf.Abs(transform.position.y - targetPosition.y) > 0.01)
+                        if (horizontal)
                         {
-                            transform.position = new(transform.position.x, transform.position.y - velocity * Time.deltaTime * speed);
+                            if (startsLeft)
+                            {
+                                if (Mathf.Abs(transform.position.x - startPosition.x) > 0.01)
+                                {
+                                    transform.position = new(transform.position.x - velocity * Time.deltaTime * speed, transform.position.y);
+                                }
+                            }
+                            else if (startsRight)
+                            {
+                                if (Mathf.Abs(transform.position.x - startPosition.x) > 0.01)
+                                {
+                                    transform.position = new(transform.position.x + velocity * Time.deltaTime * speed, transform.position.y);
+                                }
+                            }
+                        }
+                        else
+                        {
+                            if (startsDown)
+                            {
+                                if (Mathf.Abs(transform.position.y - startPosition.y) > 0.01)
+                                {
+                                    transform.position = new(transform.position.x, transform.position.y - velocity * Time.deltaTime * speed);
+                                }
+                            }
+                            else if (startsUp)
+                            {
+                                if (Mathf.Abs(transform.position.y - startPosition.y) > 0.01)
+                                {
+                                    transform.position = new(transform.position.x, transform.position.y + velocity * Time.deltaTime * speed);
+                                }
+                            }
                         }
                     }
                 }
             }
             else
             {
-                if (horizontal)
-                {
-                    if (startsLeft)
-                    {
-                        if (Mathf.Abs(transform.position.x - startPosition.x) > 0.01)
-                        {
-                            transform.position = new(transform.position.x - velocity * Time.deltaTime * speed, transform.position.y);
-                        }
-                    }
-                    else if (startsRight)
-                    {
-                        if (Mathf.Abs(transform.position.x - startPosition.x) > 0.01)
-                        {
-                            transform.position = new(transform.position.x + velocity * Time.deltaTime * speed, transform.position.y);
-                        }
-                    }
-                }
-                else
-                {
-                    if (startsDown)
-                    {
-                        if (Mathf.Abs(transform.position.y - startPosition.y) > 0.01)
-                        {
-                            transform.position = new(transform.position.x, transform.position.y - velocity * Time.deltaTime * speed);
-                        }
-                    }
-                    else if (startsUp)
-                    {
-                        if (Mathf.Abs(transform.position.y - startPosition.y) > 0.01)
-                        {
-                            transform.position = new(transform.position.x, transform.position.y + velocity * Time.deltaTime * speed);
-                        }
-                    }
-                }
-            }
-        }
-        else
-        {
-            if(change)
-            {
-                if(light.intensity < 1)
-                {
-                    light.intensity += lightChangeSpeed;
-                }
-                else
-                {
-                    light.intensity = 1;
-                }
-
-                if(light.pointLightOuterRadius < 10)
-                {
-                    light.pointLightOuterRadius += lightChangeSpeed;
-                }
-                else
-                {
-                    light.pointLightOuterRadius = 10;
-                }
-            }
-            else
-            {
-                if(light.intensity > 0.1)
-                {
-                    light.intensity -= lightChangeSpeed;
-                }
-                else
+                if (GameHandler.dead)
                 {
                     light.intensity = 0;
-                }
-
-                if (light.pointLightOuterRadius > 3)
-                {
-                    light.pointLightOuterRadius -= lightChangeSpeed;
+                    light.pointLightOuterRadius = 3;
                 }
                 else
                 {
-                    light.pointLightOuterRadius = 3;
+                    if (change)
+                    {
+                        if (light.intensity < 1)
+                        {
+                            light.intensity += lightChangeSpeed;
+                        }
+                        else
+                        {
+                            light.intensity = 1;
+                        }
+
+                        if (light.pointLightOuterRadius < 10)
+                        {
+                            light.pointLightOuterRadius += lightChangeSpeed;
+                        }
+                        else
+                        {
+                            light.pointLightOuterRadius = 10;
+                        }
+                    }
+                    else
+                    {
+                        if (light.intensity > 0.1)
+                        {
+                            light.intensity -= lightChangeSpeed;
+                        }
+                        else
+                        {
+                            light.intensity = 0;
+                        }
+
+                        if (light.pointLightOuterRadius > 3)
+                        {
+                            light.pointLightOuterRadius -= lightChangeSpeed;
+                        }
+                        else
+                        {
+                            light.pointLightOuterRadius = 3;
+                        }
+                    }
                 }
             }
         }
