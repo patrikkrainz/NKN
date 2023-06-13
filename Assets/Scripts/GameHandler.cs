@@ -217,6 +217,7 @@ public class GameHandler : MonoBehaviour
         DT.SetActive(false);
         DeathCount = 0;
         Timer = 0;
+        Cursor.visible = true;
         UnityEngine.SceneManagement.SceneManager.LoadScene("MainMenu");
     }
 }
