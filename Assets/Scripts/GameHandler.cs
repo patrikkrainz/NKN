@@ -33,6 +33,7 @@ public class GameHandler : MonoBehaviour
     void Start()
     {
         WinScreen.SetActive(false);
+        Time.timeScale = 1;
 
         if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name.ToString() == "MainMenu")
         {
@@ -72,7 +73,6 @@ public class GameHandler : MonoBehaviour
                 Time.timeScale = 0;
                 DT.SetActive(false);
                 DeathScreen.SetActive(true);
-                DeathCount += 1;
             }
             else if (won)
             {
@@ -98,20 +98,23 @@ public class GameHandler : MonoBehaviour
                 }
                 else if (DeathScreen.activeSelf)
                 {
+                    DeathCount += 1;
                     DeathScreen.SetActive(false);
+                    DT.SetActive(true);
                     Time.timeScale = 1;
                     Player.transform.position = spawnPosition;
                     dead = false;
                 }
             }
 
-            if (!WinScreen && !DeathScreen && Input.GetKeyDown(PauseGame))
+            if (!WinScreen.activeSelf && !DeathScreen.activeSelf && Input.GetKeyDown(PauseGame))
             {
                 if (!paused)
                 {
                     paused = true;
                     Time.timeScale = 0;
                     PauseM.SetActive(true);
+                    Background.SetActive(true);
                     Cursor.visible = true;
                 }
                 else
@@ -119,6 +122,7 @@ public class GameHandler : MonoBehaviour
                     paused = false;
                     Time.timeScale = 1;
                     PauseM.SetActive(false);
+                    Background.SetActive(false);
                     Cursor.visible = false;
                 }
             }
